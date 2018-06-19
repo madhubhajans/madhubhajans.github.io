@@ -8,53 +8,33 @@
     var searchBox, listElement, searchBtn, progressBar;
     var allBhajans = p1.concat(p2, p3, p4);
     var filteredBhajans = allBhajans;
-    var timeouts= [];
+    var timeout;
     var evtdata;
     var cancel = false;
+    var busy = false;
 
     var delayedSearch = (evt) => {
         cancel = true;
-        timeouts.forEach((timeout) => clearTimeout(timeout));
-        timeouts = [];
+        clearTimeout(timeout);
+        timeout = 0;
         evtdata = evt;
-        timeouts.push(setTimeout(onSearch, 500));
+        //timeouts.push(setTimeout(onSearch, 1));
+        var startSearch = () => {
+            if(!busy){
+                clearTimeout(timeout);
+                onSearch();
+            }
+            else{ 
+                timeout = setTimeout(startSearch, 250);
+            }
+        }
+
+        startSearch();
     }
 
-    var onSearchBtnClicked = (evt) => {
+    var onSearch = async(evt) => {
         cancel = false;
-        searchBox.setAttribute("disabled", true);
-        searchBtn.setAttribute("disabled", true);
-        progressBar.setAttribute("class", "visible");
-        var searchKey = searchBox.value;
-        if (!searchKey || searchKey === '') {
-            filteredBhajans = allBhajans;
-            updateList();
-            searchBox.removeAttribute("disabled");
-            searchBtn.removeAttribute("disabled");
-            progressBar.setAttribute("class", "hidden");
-        }
-        else {
-            var filteredBhajansPromises = [];
-            filteredBhajans = [];
-            filteredBhajansPromises.push(getFilterPromise(() => { filteredBhajans = filteredBhajans.concat(filterList(searchKey, p1)); }));
-            filteredBhajansPromises.push(getFilterPromise(() => { filteredBhajans = filteredBhajans.concat(filterList(searchKey, p2)); }));
-            filteredBhajansPromises.push(getFilterPromise(() => { filteredBhajans = filteredBhajans.concat(filterList(searchKey, p3)); }));
-            filteredBhajansPromises.push(getFilterPromise(() => { filteredBhajans = filteredBhajans.concat(filterList(searchKey, p4)); }));
-
-            Promise.all(filteredBhajansPromises).then(() => {
-                if (!cancel) {
-                    //console.log("updateing list...");
-                    updateList();
-                    searchBox.removeAttribute("disabled");
-                    searchBtn.removeAttribute("disabled");
-                    progressBar.setAttribute("class", "hidden");
-                }
-            });
-        }
-    }
-
-    var onSearch = (evt) => {
-        cancel = false;
+        busy = true;
         evt = evtdata;
         var searchKey = evt.target.value;
         if (!searchKey || searchKey === '') {
@@ -62,72 +42,116 @@
             updateList();
         }
         else {
-            var filteredBhajansPromises = [];
             filteredBhajans = [];
-            filteredBhajansPromises.push(getFilterPromise(() => {  filteredBhajans = filteredBhajans.concat(filterList(searchKey, p1));  }));
-            filteredBhajansPromises.push(getFilterPromise(() => {  filteredBhajans = filteredBhajans.concat(filterList(searchKey, p2));  }));
-            filteredBhajansPromises.push(getFilterPromise(() => {  filteredBhajans = filteredBhajans.concat(filterList(searchKey, p3));  }));
-            filteredBhajansPromises.push(getFilterPromise(() => {  filteredBhajans = filteredBhajans.concat(filterList(searchKey, p4));  }));
 
-            Promise.all(filteredBhajansPromises).then(() => {
-                if (!cancel) {
-                    //console.log("updateing list...");
-                    updateList();
-                }
-            });
+            filteredBhajans =  await  getFilterPromise( () => filterListUsingIndex(searchKey, allBhajans));
+            if(!cancel && filteredBhajans.length == 0){
+                filteredBhajans = await  getFilterPromise( () => filterList(searchKey, allBhajans));
+            }
+            if(!cancel){
+                updateList();
+            }
         }
+        busy = false;
     }
 
     var getFilterPromise = (filterFunc) => {
         return new Promise(resolve => {
-            setTimeout(() => {
+            setTimeout(async() => {
                 if (cancel) {
-                    resolve();
+                    resolve([]);
                 } else {
-                    filterFunc();
-                    resolve();
+                    resolve(filterFunc());
                 }
             }, 1);
         });
     }
 
-    var filterList = (searchKey, list) => {
-        var searchKeyLowerCase = searchKey.toLowerCase();
-        var filteredList = list.filter(bhajan => bhajan.hin.includes(searchKey));
-        if (filteredList.length == 0) {
-            var filteredList = list.filter(bhajan => bhajan.eng.includes(searchKeyLowerCase));
-            if (filteredList.length == 0) {
-                searchKeyLowerCase = searchKeyLowerCase.replace(/aa/g, "a")
-                    .replace(/ee/g, "i")
-                    .replace(/oo/g, "u");
+    var filterListUsingIndex = (searchKey, list) => {
+        var fi, fa = [];
+        searchKey = searchKey.toLowerCase();
+        fi = indexData[searchKey];
+        if(fi === undefined) {
+            searchKey = searchKey.replace(/aa/g, "a")
+                .replace(/ee/g, "i")
+                .replace(/oo/g, "u");
 
-                filteredList = list.filter(bhajan => bhajan.eng.includes(searchKeyLowerCase));
+            fi = indexData[searchKey];
 
-                if (filteredList.length == 0) {
-                    searchKeyLowerCase = searchKeyLowerCase.replace(/dhd/g, "ddh");
-                    filteredList = list.filter(bhajan => bhajan.eng.includes(searchKeyLowerCase));
+            if(fi === undefined) {
+                searchKey = searchKey.replace(/dhd/g, "ddh");
+                fi = indexData[searchKey];
 
-                    if (filteredList.length == 0) {
-                        searchKeyLowerCase = searchKeyLowerCase.replace(/jny/g, "dny")
-                            .replace(/gny/g, "dny")
-                            .replace(/jhy/g, "dny");
-                        filteredList = list.filter(bhajan => bhajan.eng.includes(searchKeyLowerCase));
+                if(fi === undefined) {
+                    searchKey = searchKey.replace(/jny/g, "dny")
+                        .replace(/gny/g, "dny")
+                        .replace(/jhy/g, "dny");
+                    fi = indexData[searchKey];
 
-                        if (filteredList.length == 0) {
-                            searchKeyLowerCase = searchKeyLowerCase.replace(/ghy/g, "dny")
-                                .replace(/gy/g, "dny");
-                            filteredList = list.filter(bhajan => bhajan.eng.includes(searchKeyLowerCase));
+                    if(fi === undefined) {
+                        searchKey = searchKey.replace(/ghy/g, "dny")
+                            .replace(/gy/g, "dny");
+                        fi = indexData[searchKey];
 
-                            if (filteredList.length == 0) {
-                                searchKeyLowerCase = searchKeyLowerCase.replace(/amh/g, "ahm");
-                                filteredList = list.filter(bhajan => bhajan.eng.includes(searchKeyLowerCase));
-                            }
+                        if(fi === undefined) {
+                            searchKey = searchKey.replace(/amh/g, "ahm");
+                            fi = indexData[searchKey];
                         }
                     }
                 }
             }
         }
 
+        if(fi !== undefined){
+            fi.forEach(indx => {
+                fa.push(allBhajans[indx]);
+            });
+        }
+
+        return fa;
+    }
+
+    var filterList = (searchKey, list) => {
+        
+        var searchKeyLowerCase = searchKey.toLowerCase();
+        if (searchKeyLowerCase.match(/[a-z]/i)) {
+            // alphabet letters found
+            var filteredList =  list.filter(bhajan => bhajan.eng.includes(searchKeyLowerCase) );
+            //console.log("matched: " +  filteredList.length);
+            if (filteredList.length == 0) {
+                searchKeyLowerCase = searchKeyLowerCase.replace(/aa/g, "a")
+                    .replace(/ee/g, "i")
+                    .replace(/oo/g, "u");
+
+                filteredList =  list.filter(bhajan => bhajan.eng.includes(searchKeyLowerCase));
+
+                if (filteredList.length == 0) {
+                    searchKeyLowerCase = searchKeyLowerCase.replace(/dhd/g, "ddh");
+                    filteredList =  list.filter(bhajan => bhajan.eng.includes(searchKeyLowerCase));
+
+                    if (filteredList.length == 0) {
+                        searchKeyLowerCase = searchKeyLowerCase.replace(/jny/g, "dny")
+                            .replace(/gny/g, "dny")
+                            .replace(/jhy/g, "dny");
+                        filteredList =  list.filter(bhajan => bhajan.eng.includes(searchKeyLowerCase));
+
+                        if (filteredList.length == 0) {
+                            searchKeyLowerCase = searchKeyLowerCase.replace(/ghy/g, "dny")
+                                .replace(/gy/g, "dny");
+                            filteredList =  list.filter(bhajan => bhajan.eng.includes(searchKeyLowerCase));
+
+                            if (filteredList.length == 0) {
+                                searchKeyLowerCase = searchKeyLowerCase.replace(/amh/g, "ahm");
+                                filteredList =  list.filter(bhajan => bhajan.eng.includes(searchKeyLowerCase));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            filteredList =  list.filter(bhajan => bhajan.hin.includes(searchKey));
+        }
         return filteredList;
     }
 
