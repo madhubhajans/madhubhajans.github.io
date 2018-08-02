@@ -213,7 +213,7 @@
     { eng: 'vruksh audumbaracha jithe dise', hin: 'वृक्ष औदुम्बराचा जिथे दिसे', vol: '2', pn: '243' },
     { eng: 'ashadhicha sohala nighuni mi', hin: 'आषाढीचा सोहळा निघुनी मी', vol: '2', pn: '244' },
     { eng: 'kadhi tujhi ti pandhari pahu', hin: 'कधी तुझी ती पंढरी पाहू', vol: '2', pn: '245' },
-    { eng: 'namadevane patr dhadile', hin: 'नामदेवाने पत्र धाडिले', vol: '2', pn: '246' },
+    { eng: 'namdevane patr dhadile', hin: 'नामदेवाने पत्र धाडिले', vol: '2', pn: '246' },
     { eng: 'sharan sharan gurudev datta', hin: 'शरण् शरण गुरूदेव दत्ता', vol: '2', pn: '247' },
     { eng: 'andhar majhya jivani tohi dadun', hin: 'अंधार माझ्या जीवनी तोही दडून', vol: '2', pn: '248' },
     { eng: 'prarthana yati tujala bagh jiv', hin: 'प्रार्थना यति तुजला बघ जीव', vol: '2', pn: '249' },
