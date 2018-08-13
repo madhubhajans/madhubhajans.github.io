@@ -345,7 +345,7 @@
     { eng: 'pathi kona sathi', hin: 'पाठी कोणा साठी', vol: '3', pn: '402' },
     { eng: 'adnyani adnyani amhi tar', hin: 'अज्ञानी अज्ञानी आम्ही तर', vol: '3', pn: '403' },
     { eng: 'javal guru paurnimechi ali ghadi', hin: 'जवळ गुरू पौर्णीमेची आली घडी', vol: '3', pn: '405' },
-    { eng: 'mi pahiyela ya yoddha', hin: 'मी पाहियेला या योद्धा', vol: '3', pn: '406' },
+    { eng: 'mi pahiyela ya dola', hin: 'मी पाहियेला या डोळा', vol: '3', pn: '406' },
     { eng: 'sagar sarita dev devata', hin: 'सागर सरिता देव देवता', vol: '3', pn: '408' },
     { eng: 'jhadveli ti ranapakhare', hin: 'झाडवेली ती रानापाखरे', vol: '3', pn: '410' },
     { eng: 'suvarna lanka sujalam sufalam', hin: 'सुवर्णलंका सुजलम् सुफलम्', vol: '3', pn: '411' },
