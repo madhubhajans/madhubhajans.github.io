@@ -25,7 +25,12 @@
         // Function to fetch and embed HTML content
         function embedHTML(filename) {
             fetch(filename)
-                .then(response => response.text())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
                 .then(html => {
                     document.getElementById('embeddedContent').innerHTML = formatText(html);
                 })
