@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* CSS for the container */
+        #embeddedContent {
+            margin: 0 auto;
+            border: 4px solid #c3c3c3; /* Border style */
+            border-radius: 10px; /* Border radius for rounded corners */
+            padding: 10px; /* Padding inside the border */
+            width: fit-content; /* Adjusts container width to fit content */
+        }
+    </style>
+</head>
+<body>
+    <div id="embeddedContent"></div>
+
+    <script>
+        // Get the filename from the query parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const filename = "./bhajans/" + urlParams.get('b') + ".txt";
+
+        // Function to fetch and embed HTML content
+        function embedHTML(filename) {
+            fetch(filename)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('embeddedContent').innerHTML = formatText(html);
+                })
+                .catch(error => {
+                    console.error('Error fetching HTML:', error);
+                    document.getElementById('embeddedContent').innerHTML = "Comming soon...";
+                });
+        }
+
+        function formatText(text) {
+            text = '<h3>'+ text;
+            text = text.replace(/\n/, '</h3>');
+            return text.replace(/\n/g, '<br/>');
+        }
+
+        // Call the function with the specified filename
+        if (filename) {
+            embedHTML(filename);
+        } else {
+            console.error('Filename not specified in query parameters.');
+        }
+    </script>
+</body>
+</html>
