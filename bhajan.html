@@ -21,7 +21,7 @@
     <script>
         // Get the filename from the query parameters
         const urlParams = new URLSearchParams(window.location.search);
-        const filename = "./bhajans/" + urlParams.get('b') + ".txt";
+        const filename = "./bhajans/" + urlParams.get('b').split("-")[0] + "/" + urlParams.get('b') + ".txt";
 
         // Function to fetch and embed HTML content
         function embedHTML(filename) {
