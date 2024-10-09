@@ -1,7 +1,7 @@
 const fs = require('fs');
 const p1 = require('./part1');
-const p2 = require('./part1');
-const p3 = require('./part2');
+const p2 = require('./part2');
+const p3 = require('./part3');
 const p4 = require('./part4');
 const filePath = './scripts/indexdata.js';
 
