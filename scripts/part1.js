@@ -3,7 +3,7 @@
     { eng: 'gan nayaka gaurinandana ganesh ganapati', hin: 'गणनायका गौरीनंदना', vol: '1', pn: '3' },
     { eng: 'nach ganesha nach ganesha ganapati', hin: 'नाच गणेशा नाच गणेशा', vol: '1', pn: '4' },
     { eng: 'dhumravarna dhumraketu dhanya lambodara ganapati ganesh', hin: 'धुम्रवर्ण धूम्रकेतु धन्य लंबोदरा', vol: '1', pn: '5' },
-    { eng: 'tuzyachsathi maha ganapati ganesh', hin: 'तुझ्याचसाठी महागणपती', vol: '1', pn: '6' },
+    { eng: 'tuzyachsathi maha ganapati', hin: 'तुझ्याचसाठी महागणपती', vol: '1', pn: '6' },
     { eng: 'managalmurti tuziya pudhati ganapati', hin: 'मंगलमूर्ती तुझिया पुढती', vol: '1', pn: '7' },
     { eng: 'mahaganapati daya kari', hin: 'महागणपती दया करी', vol: '1', pn: '8' },
     { eng: 'he moreshwara he mayureshwara', hin: 'हे मोरेश्वर हे मयुरेश्वर', vol: '1', pn: '9' },
