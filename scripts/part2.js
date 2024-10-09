@@ -357,3 +357,7 @@
     { eng: 'ramkrushn hari ramkrushn hari', hin: 'रामकृष्ण हरी रामकृष्ण हरी', vol: '2', pn: '405' },
     { eng: 'jay raghunandan brahmaharihar gananayakaji', hin: 'जय रघुनंदन ब्र्म्हहरिहर गणनायकजी', vol: '2', pn: '406' }
 ];
+
+if (typeof module === 'object' && module.exports) {
+    module.exports = p2;
+}
