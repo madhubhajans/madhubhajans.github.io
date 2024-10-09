@@ -4,7 +4,6 @@ run-name: Regenerating index
 on:
   push:
     branches: ['master']
-    paths: ['scripts/**']
     
 jobs:
   update-file:
