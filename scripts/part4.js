@@ -363,3 +363,7 @@
     { eng: 'are dusman tu majha', hin: 'अरे दुष्मन तू माझा', vol: '4', pn: '370' },
     { eng: 'yamune tiri jhopala hindlal', hin: 'यमुने तीरी झोपला हिन्दलाल', vol: '4', pn: '371' }
 ];
+
+if (typeof module === 'object' && module.exports) {
+    module.exports = p4;
+}
