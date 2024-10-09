@@ -374,3 +374,7 @@
     { eng: 'tya atmyane deh jhijvala', hin: 'त्या आत्म्याने देह झिजवला', vol: '3', pn: '438' },
     { eng: 'ravirajache hota agaman', hin: 'रविराजाचे होता आगमन', vol: '3', pn: '440' }
 ];
+
+if (typeof module === 'object' && module.exports) {
+    module.exports = p3;
+}
