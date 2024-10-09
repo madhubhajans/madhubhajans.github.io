@@ -1,6 +1,6 @@
 ﻿var p1 = [
     { eng: 'mangal din ale', hin: 'मंगल दिन आले', vol: '1', pn: '2' },
-    { eng: 'gan nayaka gaurinandana', hin: 'गणनायका गौरीनंदना', vol: '1', pn: '3' },
+    { eng: 'gan nayaka gaurinandana ganesh ganapati', hin: 'गणनायका गौरीनंदना', vol: '1', pn: '3' },
     { eng: 'nach ganesha nach ganesha', hin: 'नाच गणेशा नाच गणेशा', vol: '1', pn: '4' },
     { eng: 'dhumravarna dhumraketu dhanya lambodara', hin: 'धुम्रवर्ण धूम्रकेतु धन्य लंबोदरा', vol: '1', pn: '5' },
     { eng: 'tuzyachsathi maha ganapati', hin: 'तुझ्याचसाठी महागणपती', vol: '1', pn: '6' },
