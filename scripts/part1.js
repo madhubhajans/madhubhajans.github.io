@@ -6,7 +6,7 @@
     { eng: 'tuzyachsathi maha ganapati', hin: 'तुझ्याचसाठी महागणपती', vol: '1', pn: '6' },
     { eng: 'managalmurti tuziya pudhati ganapati', hin: 'मंगलमूर्ती तुझिया पुढती', vol: '1', pn: '7' },
     { eng: 'mahaganapati daya kari', hin: 'महागणपती दया करी', vol: '1', pn: '8' },
-    { eng: 'he moreshwara he mayureshwara', hin: 'हे मोरेश्वर हे मयुरेश्वर', vol: '1', pn: '9' },
+    { eng: 'he moreshwara he mayureshwara ganapati ganesh', hin: 'हे मोरेश्वर हे मयुरेश्वर', vol: '1', pn: '9' },
     { eng: 'pratham stavan karato', hin: 'प्रथम स्तवन करतो', vol: '1', pn: '10' },
     { eng: 'shendur malavati', hin: 'शेंदूर मळवटी', vol: '1', pn: '11' },
     { eng: 'he ganadhishare vandan', hin: 'हे गणाधीशारे वंदन', vol: '1', pn: '12' },
