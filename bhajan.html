@@ -1,8 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicons/site.webmanifest">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://shrinanabhajan.github.io/images/favicons/apple-touch-icon.png">
+    <meta property="og:image:width" content="180">
+    <meta property="og:image:height" content="180">
+    <meta property="og:title" content="अक्षय मधूभजन" />
+    <meta property="og:description" content="प.पू.ॐ दत्त श्री ठाकूर महाराज भजन संग्रह " />
     <style>
         /* CSS for the container */
         #embeddedContent {
@@ -12,11 +22,46 @@
             padding: 10px; /* Padding inside the border */
             width: fit-content; /* Adjusts container width to fit content */
             font-size: x-large;
+            min-height: 750px;
+            min-width: 340px;
+        }
+       
+        .watermarked-div {
+            position: absolute;
+            left: 10px;
+            width: 95%;
+            height: 100%;
+            display: inline-block; /* Allows width & height to be determined by text */
+            padding: 2px 0px; /* Adjust as needed */
+            
+            /* Background Image Settings */
+            background-image: url(/images/wm-4.png);
+            background-size: contain; /* Ensures aspect ratio is maintained */
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            /* Add a translucent white overlay */
+            background-color: rgba(255, 255, 255, 0.7); /* Adjust transparency (0.1 - 1) */
+            background-blend-mode: overlay; /* Makes the image blend with background */
+            
+            /* Text Styles */
+            font-size: 20px;
+            font-weight: 600;
+            
+            filter: grayscale(1);
+
+            color: black; /* Adjust for contrast */
+
+            overflow: scroll;
         }
     </style>
 </head>
 <body>
-    <div id="embeddedContent"></div>
+    
+    <div class="watermarked-div">
+        <div id="embeddedContent" >
+        </div>
+    </div>
 
     <script>
         // Get the filename from the query parameters
@@ -33,12 +78,37 @@
                     return response.text();
                 })
                 .then(html => {
+                    updateTitle(html);
                     document.getElementById('embeddedContent').innerHTML = formatText(html);
                 })
                 .catch(error => {
                     console.error('Error fetching HTML:', error);
                     document.getElementById('embeddedContent').innerHTML = "Comming soon...";
                 });
+        }
+
+        function updateTitle(text) {
+            const title = getFirstNonEmptyLine(text) + " - मधूभजन";
+            document.title = title;
+            // Set dynamic meta tags
+            updateMetaTag("og:url", window.location.href);
+            updateMetaTag("og:title", title);
+            updateMetaTag("twitter:title", title);
+
+        }
+
+        function getFirstNonEmptyLine(fileText) {
+            return fileText
+                .split(/\r?\n/)  // Split into lines (handles both Windows \r\n and Unix \n)
+                .map(line => line.trim())  // Trim whitespace from each line
+                .find(line => line !== '');  // Return the first non-empty line
+        }
+
+        function updateMetaTag(name, content) {
+            let tag = document.querySelector(`meta[property='${name}']`) || document.createElement('meta');
+            tag.setAttribute('property', name);
+            tag.setAttribute('content', content);
+            document.head.appendChild(tag);
         }
 
         function formatText(text) {
@@ -53,6 +123,34 @@
         } else {
             console.error('Filename not specified in query parameters.');
         }
+
+        let wakeLock = null;
+
+        // Function to request the wake lock
+        async function requestWakeLock() {
+          try {
+            wakeLock = await navigator.wakeLock.request('screen');
+            console.log("Screen Wake Lock is active.");
+        
+            // Handle release of the wake lock
+            wakeLock.addEventListener('release', () => {
+              console.log("Screen Wake Lock was released.");
+            });
+          } catch (err) {
+            console.error(`Wake Lock error: ${err.name}, ${err.message}`);
+          }
+        }
+        
+        // Call requestWakeLock when the page is loaded
+        document.addEventListener('DOMContentLoaded', requestWakeLock);
+        
+        // Optional: Re-request wake lock if it is released
+        document.addEventListener('visibilitychange', () => {
+          if (wakeLock !== null && document.visibilityState === 'visible') {
+            requestWakeLock();
+          }
+        });
+
     </script>
 </body>
 </html>
