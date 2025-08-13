@@ -241,7 +241,7 @@
     { eng: 'he usthiladhipti raja khel', hin: 'हे उस्थिलाधिपती राजा खेळ', vol: '2', pn: '271' },
     { eng: 'he mam bhagvanta far vilamb', hin: 'हे मम भगवंता फार विलंब', vol: '2', pn: '272' },
     { eng: 'chuko na kadhi te kartavy', hin: 'चुको ना कधी ते कर्तव्य', vol: '2', pn: '273' },
-    { eng: 'jalabhitari tya shripadraje', hin: 'जलाभितरी त्या श्रीपादराजे', vol: '2', pn: '274' },
+    { eng: 'jalabhitari tya shripadraje krushna mai sang mala', hin: 'जलाभितरी त्या श्रीपादराजे', vol: '2', pn: '274' },
     { eng: 'panchgange kathavarti kiti vat', hin: 'पंचगंगे काठावरती किती वाट', vol: '2', pn: '275' },
     { eng: 'bare paduranga bhoga bhogu de', hin: 'बारे पाडुरंगा भोग भूोगु दे', vol: '2', pn: '276' },
     { eng: 'dhavare pav re dhav re gururaya', hin: 'धावरे पाव रे धाव रे गुरूराया', vol: '2', pn: '277' },
