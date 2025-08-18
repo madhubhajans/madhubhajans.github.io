@@ -319,7 +319,7 @@
     { eng: 'bola mukhe bola pandurang hari', hin: 'बोला मुखे बोला पांडुरंग हरि', vol: '1', pn: '362' },
     { eng: 'gati vrukshaveli vithuche abhang', hin: 'गाती वृक्षवेली विठूचे अभंग', vol: '1', pn: '363' },
     { eng: 'pimpalas pan panavar dhyan', hin: 'पिपळास पान पानावर ध्यान', vol: '1', pn: '364' },
-    { eng: 'sati rami doghi bahini', hin: 'सती रामी दोघी बहिणी', vol: '1', pn: '365' },
+    { eng: 'sati rami doghi bahini', hin: 'संती रामी दोघी बहिणी', vol: '1', pn: '365' },
     { eng: 'ranga dari lagalya darshanala', hin: 'रांगा दारी लागल्या दर्शनाला', vol: '1', pn: '366' },
     { eng: 'pandurang bol pandurang bol name tyache anamol', hin: 'पांडुरंग बोल पांडुरंग बोल नामे त्याचे अनमोल', vol: '1', pn: '367' },
     { eng: 'ram patit pavan patit pavan ram', hin: 'राम पतित पावन पतित पावन राम', vol: '1', pn: '368' },
